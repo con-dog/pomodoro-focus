@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "version": "1.0.1",
-  "name": "Pomodoro Focus - Persistent In-Page Focus Timer",
+  "name": "Pomodoro Focus - In-Page Timer",
   "short_name": "Pomodoro Focus",
   "description": "Maximize productivity with a Pomodoro timer that's always visible in your browsers pages.",
   "author": "developer@example.com",

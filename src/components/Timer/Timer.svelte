@@ -5,6 +5,8 @@
   import { faCircle as faCircleEmpty } from '@fortawesome/free-regular-svg-icons'
   import { faCircle } from '@fortawesome/free-solid-svg-icons'
   import hexToHSL from '../../helpers/hexToHSL'
+  import ping from '../../assets/ping.mp3'
+  import { Howl, Howler } from 'howler'
 
   export let colors
   export let mode
@@ -18,6 +20,10 @@
   let timerRunning = false
   let remainingTime: number | null = null
 
+  let sound = new Howl({
+    src: [ping]
+  })
+
   $: minutes = Math.floor(time / 60)
   $: seconds = time % 60
 
@@ -26,6 +32,7 @@
 
     timer = setInterval(() => {
       if (time === 0) {
+        sound.play()
         stopTimer()
         if (mode === 'pomodoro') {
           if (selectedTask) updateTaskProgress(selectedTask)

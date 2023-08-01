@@ -12,9 +12,9 @@
   export let setMode
 
   let times = {
-    pomodoro: 25 * 60,
-    shortBreak: 5 * 60,
-    longBreak: 15 * 60
+    pomodoro: 3,
+    shortBreak: 3,
+    longBreak: 5
   }
 
   let timer: number

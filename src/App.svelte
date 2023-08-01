@@ -11,6 +11,7 @@
   }
   let mode = 'pomodoro'
   let progress = 0
+  let tasks = []
 
   function setLabelColor(e, target) {
     colors[target] = e.target.value

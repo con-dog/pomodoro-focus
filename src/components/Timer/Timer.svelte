@@ -5,9 +5,9 @@
   export let progress
 
   let times = {
-    pomodoro: 3,
-    shortBreak: 2,
-    longBreak: 5
+    pomodoro: 25 * 60,
+    shortBreak: 5 * 60,
+    longBreak: 15 * 60
   }
 
   let timer: number
@@ -68,18 +68,16 @@
   }
 </script>
 
-<!-- If timerRunning == false, set the class to 'flash' -->
-<!-- Set the class based on mode (red blue green) -->
 <button on:click="{handleClick}" class="{mode}">
-  {minutes}:{seconds}
+  {minutes < 10 ? '0' : ''}{minutes}:{seconds < 10 ? '0' : ''}{seconds}
 </button>
 
 <style lang="scss">
   button {
     width: 250px;
     max-width: 250px;
-    padding: 2rem 1rem;
-    font-size: 6em;
+    padding: 2.5rem 1rem;
+    font-size: 86px;
     font-weight: bold;
     border: none;
     border-radius: 5px;

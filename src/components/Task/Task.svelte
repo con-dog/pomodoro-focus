@@ -5,6 +5,7 @@
   import hexToHSL from '../../helpers/hexToHSL'
 
   export let colors
+  export let id
   export let mode
   export let task
   export let updateTask
@@ -48,6 +49,7 @@
 </script>
 
 <button
+  id="{id}"
   class="task"
   style="background-color: {`hsl(${hue}, ${saturation}%, ${lightness}%)`}; color: {colors.text}"
 >

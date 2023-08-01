@@ -3,6 +3,7 @@
   import ColorPicker from './components/ColorPicker/ColorPicker.svelte'
   import Task from './components/Task/Task.svelte'
   import Timer from './components/Timer/Timer.svelte'
+  import { tick } from 'svelte'
   import { v4 as uuid } from 'uuid'
 
   let colors = {
@@ -13,6 +14,7 @@
   }
   let mode = 'pomodoro'
   let progress = 0
+  let scrollContainer
   let tasks = []
 
   function setLabelColor(e, target) {
@@ -29,6 +31,10 @@
       text
     }
     tasks = [...tasks, task]
+
+    tick().then(() => {
+      scrollContainer.scrollTop = scrollContainer.scrollHeight
+    })
   }
 
   function updateTask(id, text) {
@@ -37,6 +43,11 @@
         task.text = text
       }
       return task
+    })
+    // Wait until the DOM has updated, then scroll to the updated task
+    tick().then(() => {
+      const updatedTask = document.getElementById(id)
+      updatedTask.scrollIntoView({ behavior: 'smooth' })
     })
   }
 </script>
@@ -56,9 +67,10 @@
     </div>
     <div class="task-wrapper">
       <AddTask addTask="{addTask}" colors="{colors}" mode="{mode}" />
-      <div class="scroll-container">
+      <div bind:this="{scrollContainer}" class="scroll-container">
         {#each tasks as task}
           <Task
+            id="{task.id}"
             colors="{colors}"
             mode="{mode}"
             task="{task}"

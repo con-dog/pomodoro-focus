@@ -67,6 +67,7 @@
   }
 
   $: [hue, saturation, lightness] = hexToHSL(colors[mode])
+  $: [flashHue, flashSaturation, flashLightness] = hexToHSL(colors.text, 0)
 </script>
 
 <button
@@ -74,7 +75,13 @@
   style="background-color: {`hsl(${hue}, ${saturation}%, ${lightness}%)`}; color: {colors.text}"
 >
   <div>
-    <p class="time" class:flash="{!timerRunning}">
+    <p
+      class="time"
+      class:flash="{!timerRunning}"
+      style="{!timerRunning
+        ? `--flash-color: hsl(${hue}, ${saturation}%, ${lightness}%)`
+        : ''}"
+    >
       {minutes < 10 ? '0' : ''}{minutes}:{seconds < 10 ? '0' : ''}{seconds}
     </p>
     <p class="mode">{mode}</p>
@@ -157,7 +164,7 @@
 
   @keyframes blinker {
     50% {
-      color: darkgray;
+      color: var(--flash-color);
     }
   }
 </style>

@@ -13,7 +13,6 @@
   let progress = 0
 
   function setLabelColor(e, target) {
-    console.log(e.target.value)
     colors[target] = e.target.value
   }
 

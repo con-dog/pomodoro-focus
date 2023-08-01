@@ -1,13 +1,17 @@
 <script lang="ts">
   // Create a non-blocking timer that can be displayed in the UI.
   // The timer will update every second and be extremely simple and basic.
+  import Fa from 'svelte-fa'
+  import { faCircle as faCircleEmpty } from '@fortawesome/free-regular-svg-icons'
+  import { faCircle } from '@fortawesome/free-solid-svg-icons'
+
   export let mode
   export let progress
   export let setMode
 
   let times = {
-    pomodoro: 2,
-    shortBreak: 2,
+    pomodoro: 1,
+    shortBreak: 1,
     longBreak: 2
   }
 
@@ -61,10 +65,34 @@
   }
 </script>
 
-<button on:click="{handleClick}" class="{mode}" class:flash="{!timerRunning}">
+<button on:click="{handleClick}" class="{mode}">
   <div>
-    {minutes < 10 ? '0' : ''}{minutes}:{seconds < 10 ? '0' : ''}{seconds}
-    <span>{mode}</span>
+    <p class="time" class:flash="{!timerRunning}">
+      {minutes < 10 ? '0' : ''}{minutes}:{seconds < 10 ? '0' : ''}{seconds}
+    </p>
+    <p class="mode">{mode}</p>
+    <span>
+      <!-- icon is faCircleEmpty if progress is 0 or 4 or 8 etc else faCircle -->
+      <Fa
+        icon="{progress % 4 === 0 && mode !== 'longBreak'
+          ? faCircleEmpty
+          : faCircle}"
+      />
+      <!-- icon is faCircleEmpty if progress is 0, 1, 4, 5 etc -->
+      <Fa
+        icon="{progress % 4 < 2 && mode !== 'longBreak'
+          ? faCircleEmpty
+          : faCircle}"
+      />
+      <!-- icon is faCircleEmpty if progress is 0, 1, 2, 4, 5, 6 etc -->
+      <Fa
+        icon="{progress % 4 < 3 && mode !== 'longBreak'
+          ? faCircleEmpty
+          : faCircle}"
+      />
+      <!-- icon is faCircleEmpty if progress is 0, 1, 2, 3, 5, 6 etc -->
+      <Fa icon="{mode !== 'longBreak' ? faCircleEmpty : faCircle}" />
+    </span>
   </div>
 </button>
 
@@ -78,11 +106,11 @@
   }
 
   button {
+    margin: 0;
+    min-width: 250px;
     width: 250px;
     max-width: 250px;
     padding: 2.5rem 1rem;
-    font-size: 86px;
-    font-weight: bold;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -90,7 +118,14 @@
     color: white;
   }
 
-  span {
+  .time {
+    font-size: 86px;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+  }
+
+  .mode {
     margin: 0;
     padding: 0;
     text-align: center;
@@ -98,6 +133,15 @@
     font-weight: normal;
     text-transform: uppercase;
     letter-spacing: 1px;
+  }
+
+  span {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1.5rem;
   }
 
   .flash {

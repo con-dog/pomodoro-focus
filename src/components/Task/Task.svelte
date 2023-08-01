@@ -38,6 +38,13 @@
       editing = false
     }
   }
+
+  function handleBlur() {
+    if (textarea.value) {
+      updateTask(task.id, textarea.value)
+    }
+    editing = false
+  }
 </script>
 
 <button
@@ -64,6 +71,7 @@
         <textarea
           bind:this="{textarea}"
           bind:value="{task.text}"
+          on:blur="{handleBlur}"
           on:keydown="{handleKeyDown}"
           maxlength="{maxCharacters}"
           placeholder="Add text: Enter to save"></textarea>

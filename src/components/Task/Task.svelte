@@ -3,8 +3,19 @@
   import { faCircleCheck as faCircleCheckEmpty } from '@fortawesome/free-regular-svg-icons'
   import { faCircleCheck } from '@fortawesome/free-solid-svg-icons'
   import hexToHSL from '../../helpers/hexToHSL'
+  import confetti from 'canvas-confetti'
+  import { onDestroy } from 'svelte'
+
+  onDestroy(() => {
+    confetti({
+      particleCount: 500,
+      spread: 80,
+      origin: { y: 0.6 }
+    })
+  })
 
   export let colors
+  export let completeTask
   export let id
   export let mode
   export let selectedTask
@@ -12,7 +23,9 @@
   export let task
   export let updateTask
 
+  let complete = false
   let editing = false
+  let icon = faCircleCheckEmpty
   let maxCharacters = 40
   let textarea
 
@@ -33,6 +46,11 @@
   function handlePClick() {
     editing = true
     setTimeout(() => textarea.focus(), 0)
+  }
+
+  function handleCompleteTask() {
+    complete = true
+    completeTask(task.id)
   }
 
   function handleKeyDown(event) {
@@ -58,12 +76,15 @@
   style="background-color: {`hsl(${hue}, ${saturation}%, ${lightness}%)`}; color: {colors.text}; --text-color: {colors.text}"
 >
   <div class="content">
-    <div class="spin-on-hover">
-      <Fa
-        icon="{faCircleCheckEmpty}"
-        style="font-size: 1.25rem; font-weight: bold;"
-      />
-    </div>
+    <button
+      class="spin-on-hover"
+      on:mouseover="{() => (icon = faCircleCheck)}"
+      on:mouseout="{() => (icon = faCircleCheckEmpty)}"
+      on:click="{handleCompleteTask}"
+      style="color: {colors.text}"
+    >
+      <Fa icon="{icon}" style="font-size: 1.25rem; font-weight: bold;" />
+    </button>
     {#if !editing}
       <button class="button-p" on:click="{handlePClick}">
         <p
@@ -156,19 +177,12 @@
     }
   }
 
-  @keyframes spin {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
-  }
-
   .spin-on-hover {
-    &:hover {
-      animation: spin 1s infinite linear;
-    }
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
   }
 
   .text-area-container {

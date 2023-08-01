@@ -4,6 +4,7 @@
   import Task from './components/Task/Task.svelte'
   import Timer from './components/Timer/Timer.svelte'
   import { tick } from 'svelte'
+  import { fly } from 'svelte/transition'
   import { v4 as uuid } from 'uuid'
 
   let colors = {
@@ -69,6 +70,10 @@
     })
   }
 
+  function completeTask(id) {
+    tasks = tasks.filter((task) => task.id !== id)
+  }
+
   function setSelectedTask(id) {
     selectedTask = id
   }
@@ -93,16 +98,22 @@
     <div class="task-wrapper">
       <AddTask addTask="{addTask}" colors="{colors}" mode="{mode}" />
       <div bind:this="{scrollContainer}" class="scroll-container">
-        {#each tasks as task}
-          <Task
-            id="{task.id}"
-            colors="{colors}"
-            mode="{mode}"
-            selectedTask="{selectedTask}"
-            setSelectedTask="{setSelectedTask}"
-            task="{task}"
-            updateTask="{updateTask}"
-          />
+        {#each tasks as task (task.id)}
+          <div
+            in:fly="{{ y: -200, duration: 500 }}"
+            out:fly="{{ y: -200, duration: 500 }}"
+          >
+            <Task
+              id="{task.id}"
+              colors="{colors}"
+              completeTask="{completeTask}"
+              mode="{mode}"
+              selectedTask="{selectedTask}"
+              setSelectedTask="{setSelectedTask}"
+              task="{task}"
+              updateTask="{updateTask}"
+            />
+          </div>
         {/each}
       </div>
     </div>

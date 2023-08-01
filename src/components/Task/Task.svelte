@@ -11,7 +11,7 @@
   $: [hue, saturation, lightness] = hexToHSL(colors[mode])
 </script>
 
-<div
+<button
   class="task"
   style="background-color: {`hsl(${hue}, ${saturation}%, ${lightness}%)`}; color: {colors.text}"
 >
@@ -20,7 +20,7 @@
     <p>{task}</p>
   </div>
   <span>33</span>
-</div>
+</button>
 
 <style lang="scss">
   .task {
@@ -28,10 +28,18 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin: 0.5rem 0;
+    margin: 0.5rem auto;
     gap: 0.5rem;
     border-radius: 5px;
     padding: 0 1rem;
+    border: none;
+    cursor: pointer;
+    width: 95%;
+    transition: all 0.1s ease-in-out;
+
+    &:hover {
+      transform: scale(1.1);
+    }
   }
 
   .content {

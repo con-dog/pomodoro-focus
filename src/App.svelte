@@ -43,11 +43,9 @@
     </div>
     <div class="task-wrapper">
       <AddTask addTask="{addTask}" colors="{colors}" mode="{mode}" />
-      <div class="tasks-wrapper">
-        {#each tasks as task}
-          <Task colors="{colors}" mode="{mode}" task="{task}" />
-        {/each}
-      </div>
+      {#each tasks as task}
+        <Task colors="{colors}" mode="{mode}" task="{task}" />
+      {/each}
     </div>
   </div>
 </main>

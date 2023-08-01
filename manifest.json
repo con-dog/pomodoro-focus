@@ -1,0 +1,11 @@
+{
+  "manifest_version": 3,
+  "name": "Pomodoro Focus - Persistent In-Page Focus Timer",
+  "version": "1.0.1",
+  "default_locale": "en",
+  "description": "Maximize productivity with 'Pomodoro Focus': a persistent, in-page Pomodoro timer that's always visible in your browsers pages. Seamlessly track your focus sessions without the need to switch tabs. Upgrade to unlock custom time intervals, sounds, and other personalized features.",
+  "author": "developer@example.com",
+  "minimum_chrome_version": "107",
+  "short_name": "Pomodoro Focus",
+  "side_panel": {}
+}

@@ -15,6 +15,7 @@
   let mode = 'pomodoro'
   let progress = 0
   let scrollContainer
+  let selectedTask
   let tasks = []
 
   function setLabelColor(e, target) {
@@ -50,6 +51,10 @@
       updatedTask.scrollIntoView({ behavior: 'smooth' })
     })
   }
+
+  function setSelectedTask(id) {
+    selectedTask = id
+  }
 </script>
 
 <main style="background-color: {colors[mode]}">
@@ -73,6 +78,8 @@
             id="{task.id}"
             colors="{colors}"
             mode="{mode}"
+            selectedTask="{selectedTask}"
+            setSelectedTask="{setSelectedTask}"
             task="{task}"
             updateTask="{updateTask}"
           />

@@ -7,6 +7,8 @@
   export let colors
   export let id
   export let mode
+  export let selectedTask
+  export let setSelectedTask
   export let task
   export let updateTask
 
@@ -51,6 +53,8 @@
 <button
   id="{id}"
   class="task"
+  class:selected="{selectedTask === task.id}"
+  on:click="{() => setSelectedTask(task.id)}"
   style="background-color: {`hsl(${hue}, ${saturation}%, ${lightness}%)`}; color: {colors.text}"
 >
   <div class="content">
@@ -102,12 +106,16 @@
     width: 95%;
 
     &:hover {
-      outline: 2px solid white;
+      outline: 2px solid white; // TODO
     }
 
     &:focus {
-      outline: 2px solid white;
+      outline: 2px solid white; // TODO
     }
+  }
+
+  .selected {
+    outline: 2px solid white; // TODO
   }
 
   .button-p {

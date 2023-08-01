@@ -15,6 +15,19 @@
 
   $: [hue, saturation, lightness] = hexToHSL(colors[mode])
 
+  const handleInput = () => {
+    textarea.style.height = 'auto' // reset the height
+    textarea.style.height = textarea.scrollHeight + 5 + 'px' // set the new height
+  }
+
+  // bind the input event to handleInput function and adjust the initial height
+  $: {
+    if (textarea) {
+      textarea.addEventListener('input', handleInput)
+      handleInput() // for initial height adjustment
+    }
+  }
+
   function handlePClick() {
     editing = true
   }
@@ -49,7 +62,7 @@
           bind:this="{textarea}"
           bind:value="{task.text}"
           on:keydown="{handleKeyDown}"
-          rows="2"
+          style="overflow:hidden;"
           maxlength="{maxCharacters}"
           placeholder="Add text: Enter to save"></textarea>
         <div class="character-count">
@@ -104,7 +117,8 @@
     font-size: 1rem;
     font-weight: 600;
     text-align: left;
-    word-break: break-all;
+    word-wrap: break-word;
+    word-break: break-word;
     color: var(--text-color);
 
     &:hover {
@@ -135,6 +149,7 @@
 
   .text-area-container {
     position: relative;
+    height: 100%;
     width: 100%;
   }
 

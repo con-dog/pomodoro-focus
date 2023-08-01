@@ -1,13 +1,18 @@
 <script lang="ts">
-  // create a non-blocking timer that can be displayed in the UI.
+  // Create a non-blocking timer that can be displayed in the UI.
   // The timer will update every second and be extremely simple and basic.
+  import { createEventDispatcher } from 'svelte'
+
   export let mode
   export let progress
+  export let setMode
+
+  const dispatch = createEventDispatcher()
 
   let times = {
-    pomodoro: 25 * 60,
-    shortBreak: 5 * 60,
-    longBreak: 15 * 60
+    pomodoro: 10,
+    shortBreak: 2,
+    longBreak: 5
   }
 
   let timer: number
@@ -16,12 +21,6 @@
   $: time = times[mode]
   $: minutes = Math.floor(time / 60)
   $: seconds = time % 60
-
-  $: console.log(mode, progress)
-
-  function setMode(newMode) {
-    mode = newMode
-  }
 
   function startTimer() {
     if (timerRunning) {
@@ -68,7 +67,7 @@
   }
 </script>
 
-<button on:click="{handleClick}" class="{mode}">
+<button on:click="{handleClick}" class="{mode}" class:flash="{!timerRunning}">
   {minutes < 10 ? '0' : ''}{minutes}:{seconds < 10 ? '0' : ''}{seconds}
 </button>
 

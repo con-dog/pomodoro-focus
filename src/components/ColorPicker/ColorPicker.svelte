@@ -1,14 +1,6 @@
 <script lang="ts">
-  $: colors = {
-    pomodoro: '#e74c3c',
-    shortBreak: '#ccb42e',
-    longBreak: '#3498db'
-  }
-
-  function setLabelColor(e, target) {
-    console.log(e.target.value)
-    colors[target] = e.target.value
-  }
+  export let colors
+  export let setLabelColor
 </script>
 
 <div>
@@ -33,6 +25,13 @@
       on:change="{(e) => setLabelColor(e, 'longBreak')}"
     />
   </label>
+  <label style="background-color: {colors['text']}">
+    <input
+      type="color"
+      value="{colors['text']}"
+      on:change="{(e) => setLabelColor(e, 'text')}"
+    />
+  </label>
 </div>
 
 <style lang="scss">
@@ -45,10 +44,11 @@
   }
 
   label {
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
     margin: 0;
     padding: 0;
-    height: 25px;
-    width: 25px;
+    height: 20px;
+    width: 20px;
     border: 2px solid white;
     border-radius: 5px;
   }

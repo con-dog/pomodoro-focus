@@ -4,7 +4,9 @@
   import Fa from 'svelte-fa'
   import { faCircle as faCircleEmpty } from '@fortawesome/free-regular-svg-icons'
   import { faCircle } from '@fortawesome/free-solid-svg-icons'
+  import hexToHSL from '../../helpers/hexToHSL'
 
+  export let colors
   export let mode
   export let progress
   export let setMode
@@ -63,9 +65,14 @@
       startTimer()
     }
   }
+
+  $: [hue, saturation, lightness] = hexToHSL(colors[mode])
 </script>
 
-<button on:click="{handleClick}" class="{mode}">
+<button
+  on:click="{handleClick}"
+  style="background-color: {`hsl(${hue}, ${saturation}%, ${lightness}%)`}; color: {colors.text}"
+>
   <div>
     <p class="time" class:flash="{!timerRunning}">
       {minutes < 10 ? '0' : ''}{minutes}:{seconds < 10 ? '0' : ''}{seconds}
@@ -97,15 +104,8 @@
 </button>
 
 <style lang="scss">
-  div {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
-  }
-
   button {
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
     margin: 0;
     min-width: 260px;
     width: 260px;
@@ -114,8 +114,15 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    background-color: rgb(255, 104, 129);
     color: white;
+  }
+
+  div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
   }
 
   .time {
@@ -146,18 +153,6 @@
 
   .flash {
     animation: blinker both 1s infinite;
-  }
-
-  .pomodoro {
-    background-color: rgb(255, 104, 129);
-  }
-
-  .shortBreak {
-    background-color: rgb(255, 179, 71);
-  }
-
-  .longBreak {
-    background-color: rgb(0, 184, 148);
   }
 
   @keyframes blinker {

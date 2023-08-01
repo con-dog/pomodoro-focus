@@ -8,7 +8,13 @@
   export let mode
   export let task
 
+  let editing = false
+
   $: [hue, saturation, lightness] = hexToHSL(colors[mode])
+
+  function handlePClick() {
+    editing = true
+  }
 </script>
 
 <button
@@ -17,11 +23,17 @@
 >
   <div class="content">
     <Fa icon="{faCircleCheckEmpty}" style="font-size: 1.25rem" />
-    <p
-      style="--flash-color: {`hsl(${hue}, ${saturation}%, ${lightness}%)`}; --text-color: {colors.text};"
-    >
-      {task}
-    </p>
+    {#if !editing}
+      <button class="button-p" on:click="{handlePClick}">
+        <p
+          style="--flash-color: {`hsl(${hue}, ${saturation}%, ${lightness}%)`}; --text-color: {colors.text};"
+        >
+          {task}
+        </p>
+      </button>
+    {:else}
+      <input type="text" value="{task}" />
+    {/if}
   </div>
   <span>33</span>
 </button>
@@ -44,6 +56,14 @@
     &:hover {
       transform: scale(1.075);
     }
+  }
+
+  .button-p {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
   }
 
   .content {

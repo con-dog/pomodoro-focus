@@ -5,9 +5,9 @@
   import Timer from './components/Timer/Timer.svelte'
 
   let colors = {
-    pomodoro: '#e74c3c',
-    shortBreak: '#ccb42e',
-    longBreak: '#3498db',
+    pomodoro: '#9a031e',
+    shortBreak: '#e9c46a',
+    longBreak: '#3F88C5',
     text: '#f3f3f3'
   }
   let mode = 'pomodoro'

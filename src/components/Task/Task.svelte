@@ -55,7 +55,7 @@
   class="task"
   class:selected="{selectedTask === task.id}"
   on:click="{() => setSelectedTask(task.id)}"
-  style="background-color: {`hsl(${hue}, ${saturation}%, ${lightness}%)`}; color: {colors.text}"
+  style="background-color: {`hsl(${hue}, ${saturation}%, ${lightness}%)`}; color: {colors.text}; --text-color: {colors.text}"
 >
   <div class="content">
     <div class="spin-on-hover">
@@ -106,16 +106,12 @@
     width: 95%;
 
     &:hover {
-      outline: 2px solid white; // TODO
-    }
-
-    &:focus {
-      outline: 2px solid white; // TODO
+      outline: 2px solid var(--text-color);
     }
   }
 
   .selected {
-    outline: 2px solid white; // TODO
+    outline: 2px solid var(--text-color);
   }
 
   .button-p {

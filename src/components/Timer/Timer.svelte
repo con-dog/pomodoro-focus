@@ -11,24 +11,17 @@
   export let progress
   export let selectedTask
   export let setMode
+  export let time: number
   export let updateTaskProgress
-
-  let times = {
-    pomodoro: 3,
-    shortBreak: 3,
-    longBreak: 5
-  }
 
   let timer: number
   let timerRunning = false
-  let time: number = times[mode]
   let remainingTime: number | null = null
 
   $: minutes = Math.floor(time / 60)
   $: seconds = time % 60
 
   function startTimer() {
-    time = remainingTime !== null ? remainingTime : times[mode]
     timerRunning = true
 
     timer = setInterval(() => {
@@ -45,11 +38,8 @@
         } else {
           setMode('pomodoro')
         }
-        time = times[mode] // set time to the new mode's time immediately
-        remainingTime = time // reset remainingTime when the timer reaches zero
       } else {
         time--
-        remainingTime = time
       }
     }, 1000)
   }

@@ -17,13 +17,20 @@
   let scrollContainer
   let selectedTask
   let tasks = []
+  let times = {
+    pomodoro: 2,
+    shortBreak: 4,
+    longBreak: 6
+  }
+  let time: number = times[mode]
+
+  function setMode(newMode: string) {
+    mode = newMode
+    time = times[mode]
+  }
 
   function setLabelColor(e, target) {
     colors[target] = e.target.value
-  }
-
-  function setMode(newMode) {
-    mode = newMode
   }
 
   function addTask(text) {
@@ -79,6 +86,7 @@
         progress="{progress}"
         selectedTask="{selectedTask}"
         setMode="{setMode}"
+        time="{time}"
         updateTaskProgress="{updateTaskProgress}"
       />
     </div>

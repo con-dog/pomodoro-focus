@@ -50,9 +50,10 @@
 
 <style lang="scss">
   button {
-    width: 240px;
-    max-width: 240px;
-    font-size: 5em;
+    width: 250px;
+    max-width: 250px;
+    padding: 2rem 1rem;
+    font-size: 6em;
     font-weight: bold;
     border: none;
     border-radius: 5px;

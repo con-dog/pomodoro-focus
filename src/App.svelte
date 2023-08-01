@@ -12,7 +12,6 @@
   main {
     font-family: sans-serif;
     text-align: center;
-    padding: 1em;
     background-color: red;
   }
 </style>

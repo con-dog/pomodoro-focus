@@ -7,13 +7,23 @@
   export let colors
   export let mode
   export let task
+  export let updateTask
 
   let editing = false
+  let maxCharacters = 40
+  let textarea
 
   $: [hue, saturation, lightness] = hexToHSL(colors[mode])
 
   function handlePClick() {
     editing = true
+  }
+
+  function handleKeyDown(event) {
+    if (task.text && event.keyCode === 13) {
+      updateTask(task.id, task.text)
+      editing = false
+    }
   }
 </script>
 
@@ -30,11 +40,22 @@
         <p
           style="--flash-color: {`hsl(${hue}, ${saturation}%, ${lightness}%)`}; --text-color: {colors.text};"
         >
-          {task}
+          {task.text}
         </p>
       </button>
     {:else}
-      <input type="text" value="{task}" />
+      <div class="text-area-container">
+        <textarea
+          bind:this="{textarea}"
+          bind:value="{task.text}"
+          on:keydown="{handleKeyDown}"
+          rows="2"
+          maxlength="{maxCharacters}"
+          placeholder="Add text: Enter to save"></textarea>
+        <div class="character-count">
+          {maxCharacters - task.text.length}
+        </div>
+      </div>
     {/if}
   </div>
   <span>33</span>
@@ -42,6 +63,7 @@
 
 <style lang="scss">
   .task {
+    position: relative;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
     display: flex;
     align-items: center;
@@ -56,8 +78,12 @@
     transition: all 0.1s ease-in-out;
 
     &:hover {
-      transform: scale(1.075);
+      transform: translateX(0.5rem);
     }
+
+    // &:focus {
+    //   outline: 2px solid white;
+    // }
   }
 
   .button-p {
@@ -106,5 +132,27 @@
     &:hover {
       animation: spin 1s infinite linear;
     }
+  }
+
+  .text-area-container {
+    position: relative;
+    width: 100%;
+  }
+
+  textarea {
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    padding: 0.5rem;
+    font-size: 1rem;
+    font-weight: 700;
+    resize: none;
+  }
+
+  .character-count {
+    position: absolute;
+    right: 0.5rem;
+    bottom: 0.5rem;
+    color: #aaa;
   }
 </style>

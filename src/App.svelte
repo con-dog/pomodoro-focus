@@ -3,6 +3,7 @@
   import ColorPicker from './components/ColorPicker/ColorPicker.svelte'
   import Task from './components/Task/Task.svelte'
   import Timer from './components/Timer/Timer.svelte'
+  import { v4 as uuid } from 'uuid'
 
   let colors = {
     pomodoro: '#9a031e',
@@ -22,9 +23,21 @@
     mode = newMode
   }
 
-  function addTask(task) {
-    console.log(task)
+  function addTask(text) {
+    let task = {
+      id: uuid(),
+      text
+    }
     tasks = [...tasks, task]
+  }
+
+  function updateTask(id, text) {
+    tasks = tasks.map((task) => {
+      if (task.id === id) {
+        task.text = text
+      }
+      return task
+    })
   }
 </script>
 
@@ -44,7 +57,12 @@
     <div class="task-wrapper">
       <AddTask addTask="{addTask}" colors="{colors}" mode="{mode}" />
       {#each tasks as task}
-        <Task colors="{colors}" mode="{mode}" task="{task}" />
+        <Task
+          colors="{colors}"
+          mode="{mode}"
+          task="{task}"
+          updateTask="{updateTask}"
+        />
       {/each}
     </div>
   </div>

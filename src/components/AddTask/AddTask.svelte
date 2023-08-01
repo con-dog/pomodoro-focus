@@ -7,47 +7,67 @@
   export let colors
   export let mode
 
+  let clicked = false
+  let maxCharacters = 40
   let text = ''
-  let maxCharacters = 50
+  let textarea
 
   $: [hue, saturation, lightness] = hexToHSL(colors[mode])
 
   $: text = text.replace(/(\r\n|\n|\r)/gm, '')
 
   function handleBlur() {
-    if (text) addTask(text)
+    if (text) {
+      addTask(text)
+      text = ''
+    }
+    clicked = false
+  }
+
+  function handleClick() {
+    clicked = true
+    setTimeout(() => textarea.focus(), 0)
   }
 
   function handleKeyDown(event) {
-    if (event.keyCode === 13) {
+    if (text && event.keyCode === 13) {
       addTask(text)
+      clicked = false
+      text = ''
     }
   }
 </script>
 
-<button
-  style="background-color: {`hsl(${hue}, ${saturation}%, ${lightness}%)`}; color: {colors.text}"
->
-  <Fa icon="{faCirclePlus}" />
-  Add Task
-</button>
-<hr />
-<div class="text-area-container">
-  <textarea
-    bind:value="{text}"
-    on:blur="{handleBlur}"
-    on:keydown="{handleKeyDown}"
-    rows="3"
-    maxlength="50"
-    placeholder="Add text: Enter to save"></textarea>
-  <div class="character-count">
-    {maxCharacters - text.length}
-  </div>
+<div class="wrapper">
+  {#if !clicked}
+    <button
+      on:click="{handleClick}"
+      style="background-color: {colors.text}; color: {colors[mode]}"
+    >
+      <Fa icon="{faCirclePlus}" />
+      Add Task
+    </button>
+  {:else}
+    <div class="text-area-container">
+      <textarea
+        bind:this="{textarea}"
+        bind:value="{text}"
+        on:blur="{handleBlur}"
+        on:keydown="{handleKeyDown}"
+        rows="2"
+        maxlength="{maxCharacters}"
+        placeholder="Add text: Enter to save"></textarea>
+      <div class="character-count">
+        {maxCharacters - text.length}
+      </div>
+    </div>
+  {/if}
 </div>
+<hr />
 
 <style lang="scss">
   button {
-    width: 90%;
+    width: 75%;
     border: none;
     border-radius: 5px;
     padding: 0.5rem 1rem;
@@ -58,7 +78,7 @@
     text-transform: uppercase;
 
     &:hover {
-      transform: scale(1.1);
+      transform: scale(1.2);
     }
 
     &:active {
@@ -66,10 +86,16 @@
     }
   }
 
+  .wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 54px;
+  }
+
   .text-area-container {
     position: relative;
     width: 100%;
-    z-index: 2;
   }
 
   textarea {

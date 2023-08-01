@@ -113,7 +113,7 @@
 <style lang="scss">
   button {
     box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
-    margin: 0;
+    margin: 2rem 0 0 0;
     min-width: 260px;
     width: 260px;
     max-width: 250px;

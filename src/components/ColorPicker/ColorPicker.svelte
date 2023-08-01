@@ -40,7 +40,7 @@
     justify-content: space-around;
     align-items: center;
     width: 100px;
-    height: 100px;
+    height: 50px;
   }
 
   label {

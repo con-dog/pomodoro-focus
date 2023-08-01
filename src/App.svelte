@@ -41,12 +41,13 @@
         setMode="{setMode}"
       />
     </div>
-    <div class="todo-wrapper">
+    <div class="task-wrapper">
       <AddTask addTask="{addTask}" colors="{colors}" mode="{mode}" />
-      {#each tasks as task}
-        <!-- show each task in a span -->
-        <Task />
-      {/each}
+      <div class="tasks-wrapper">
+        {#each tasks as task}
+          <Task colors="{colors}" mode="{mode}" task="{task}" />
+        {/each}
+      </div>
     </div>
   </div>
 </main>
@@ -78,14 +79,13 @@
       flex: 1;
     }
     .timer-wrapper {
-      flex: 4;
+      flex: 3;
     }
-    .todo-wrapper {
+    .task-wrapper {
       flex: 3;
     }
   }
 
-  .timer-wrapper,
   .color-picker-wrapper {
     display: flex;
     justify-content: center;

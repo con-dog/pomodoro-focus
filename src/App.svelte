@@ -13,8 +13,9 @@
   <Timer mode="{mode}" progress="{progress}" setMode="{setMode}" />
 </main>
 
-<style>
+<style lang="scss">
   main {
+    margin: 0;
     height: 100vh;
     width: 100%;
     display: flex;

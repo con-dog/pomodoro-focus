@@ -22,7 +22,9 @@
   style="background-color: {`hsl(${hue}, ${saturation}%, ${lightness}%)`}; color: {colors.text}"
 >
   <div class="content">
-    <Fa icon="{faCircleCheckEmpty}" style="font-size: 1.25rem" />
+    <div class="spin-on-hover">
+      <Fa icon="{faCircleCheckEmpty}" style="font-size: 1.25rem;" />
+    </div>
     {#if !editing}
       <button class="button-p" on:click="{handlePClick}">
         <p
@@ -88,6 +90,21 @@
       50% {
         color: var(--flash-color);
       }
+    }
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  .spin-on-hover {
+    &:hover {
+      animation: spin 1s infinite linear;
     }
   }
 </style>

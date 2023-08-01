@@ -9,7 +9,9 @@
   export let colors
   export let mode
   export let progress
+  export let selectedTask
   export let setMode
+  export let updateTaskProgress
 
   let times = {
     pomodoro: 3,
@@ -33,6 +35,7 @@
       if (time === 0) {
         stopTimer()
         if (mode === 'pomodoro') {
+          if (selectedTask) updateTaskProgress(selectedTask)
           progress++
           if (progress % 4 === 0) {
             setMode('longBreak')

@@ -29,7 +29,8 @@
   function addTask(text) {
     let task = {
       id: uuid(),
-      text
+      text,
+      progress
     }
     tasks = [...tasks, task]
 
@@ -52,6 +53,15 @@
     })
   }
 
+  function updateTaskProgress(id) {
+    tasks = tasks.map((task) => {
+      if (task.id === id) {
+        task.progress++
+      }
+      return task
+    })
+  }
+
   function setSelectedTask(id) {
     selectedTask = id
   }
@@ -67,7 +77,9 @@
         colors="{colors}"
         mode="{mode}"
         progress="{progress}"
+        selectedTask="{selectedTask}"
         setMode="{setMode}"
+        updateTaskProgress="{updateTaskProgress}"
       />
     </div>
     <div class="task-wrapper">

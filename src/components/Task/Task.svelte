@@ -87,7 +87,7 @@
       </div>
     {/if}
   </div>
-  <span>33</span>
+  <span>{task.progress}</span>
 </button>
 
 <style lang="scss">
@@ -127,6 +127,13 @@
     align-items: center;
     justify-content: flex-start;
     gap: 0.5rem;
+  }
+
+  span {
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: underline;
+    color: var(--text-color);
   }
 
   p {

@@ -119,7 +119,7 @@
     max-width: 250px;
     padding: 2.5rem 1.5rem;
     border: none;
-    border-radius: 5px;
+    border-radius: 25px;
     cursor: pointer;
     color: white;
   }

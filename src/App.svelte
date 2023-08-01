@@ -1,6 +1,7 @@
 <script lang="ts">
-  import AddTodo from './components/AddTodo/AddTodo.svelte'
+  import AddTask from './components/AddTask/AddTask.svelte'
   import ColorPicker from './components/ColorPicker/ColorPicker.svelte'
+  import Task from './components/Task/Task.svelte'
   import Timer from './components/Timer/Timer.svelte'
 
   let colors = {
@@ -20,6 +21,11 @@
   function setMode(newMode) {
     mode = newMode
   }
+
+  function addTask(task) {
+    console.log(task)
+    tasks = [...tasks, task]
+  }
 </script>
 
 <main style="background-color: {colors[mode]}">
@@ -35,7 +41,13 @@
         setMode="{setMode}"
       />
     </div>
-    <div class="todo-wrapper"><AddTodo colors="{colors}" mode="{mode}" /></div>
+    <div class="todo-wrapper">
+      <AddTask addTask="{addTask}" colors="{colors}" mode="{mode}" />
+      {#each tasks as task}
+        <!-- show each task in a span -->
+        <Task />
+      {/each}
+    </div>
   </div>
 </main>
 
@@ -66,10 +78,10 @@
       flex: 1;
     }
     .timer-wrapper {
-      flex: 3;
+      flex: 4;
     }
     .todo-wrapper {
-      flex: 2;
+      flex: 3;
     }
   }
 
@@ -78,15 +90,5 @@
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-
-  nav {
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    padding: 0 1rem;
   }
 </style>

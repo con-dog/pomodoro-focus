@@ -3,6 +3,7 @@
   import { faCirclePlus } from '@fortawesome/free-solid-svg-icons'
   import hexToHSL from '../../helpers/hexToHSL'
 
+  export let addTask
   export let colors
   export let mode
 
@@ -10,6 +11,18 @@
   let maxCharacters = 50
 
   $: [hue, saturation, lightness] = hexToHSL(colors[mode])
+
+  $: text = text.replace(/(\r\n|\n|\r)/gm, '')
+
+  function handleBlur() {
+    if (text) addTask(text)
+  }
+
+  function handleKeyDown(event) {
+    if (event.keyCode === 13) {
+      addTask(text)
+    }
+  }
 </script>
 
 <button
@@ -22,9 +35,11 @@
 <div class="text-area-container">
   <textarea
     bind:value="{text}"
-    rows="2"
+    on:blur="{handleBlur}"
+    on:keydown="{handleKeyDown}"
+    rows="3"
     maxlength="50"
-    placeholder="Add a description"></textarea>
+    placeholder="Add text: Enter to save"></textarea>
   <div class="character-count">
     {maxCharacters - text.length}
   </div>
@@ -54,6 +69,7 @@
   .text-area-container {
     position: relative;
     width: 100%;
+    z-index: 2;
   }
 
   textarea {

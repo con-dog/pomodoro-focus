@@ -1,29 +1,54 @@
 <script lang="ts">
   // create a non-blocking timer that can be displayed in the UI.
   // The timer will update every second and be extremely simple and basic.
-  let defaultTime = 25 * 60
-  let time = defaultTime
+  export let mode
+  export let progress
+
+  let times = {
+    pomodoro: 3,
+    shortBreak: 2,
+    longBreak: 5
+  }
+
   let timer: number
   let timerRunning = false
 
+  $: time = times[mode]
   $: minutes = Math.floor(time / 60)
   $: seconds = time % 60
 
-  $: {
-    if (time === 0) {
-      stopTimer()
-    }
+  $: console.log(mode, progress)
+
+  function setMode(newMode) {
+    mode = newMode
   }
 
-  // Modify the below function so that
   function startTimer() {
     if (timerRunning) {
       return
     }
-    timer = setInterval(() => {
-      time--
-    }, 1000)
+
+    time = times[mode] // reset time when the timer starts
     timerRunning = true
+
+    timer = setInterval(() => {
+      if (time === 0) {
+        stopTimer()
+        if (mode === 'pomodoro') {
+          progress++
+          if (progress % 4 === 0) {
+            setMode('longBreak')
+          } else {
+            setMode('shortBreak')
+          }
+        } else {
+          setMode('pomodoro')
+        }
+        time = times[mode] // reset time when the timer reaches zero
+      } else {
+        time--
+      }
+    }, 1000)
   }
 
   function stopTimer() {
@@ -44,8 +69,9 @@
 </script>
 
 <!-- If timerRunning == false, set the class to 'flash' -->
-<button on:click="{handleClick}" class="{timerRunning ? '' : 'flash'}">
-  {minutes}:{seconds}{seconds === 0 ? 0 : ''}
+<!-- Set the class based on mode (red blue green) -->
+<button on:click="{handleClick}" class="{mode}">
+  {minutes}:{seconds}
 </button>
 
 <style lang="scss">
@@ -64,6 +90,18 @@
 
   .flash {
     animation: blinker both 1s infinite;
+  }
+
+  .pomodoro {
+    background-color: rgb(255, 104, 129);
+  }
+
+  .shortBreak {
+    background-color: rgb(255, 179, 71);
+  }
+
+  .longBreak {
+    background-color: rgb(0, 184, 148);
   }
 
   @keyframes blinker {

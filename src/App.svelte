@@ -1,11 +1,13 @@
 <script lang="ts">
-  import Progress from './components/Progress/Progress.svelte'
   import Timer from './components/Timer/Timer.svelte'
   import Todos from './components/Todos/Todos.svelte'
+
+  let mode = 'pomodoro'
+  let progress = 0
 </script>
 
 <main>
-  <Timer />
+  <Timer mode="{mode}" progress="{progress}" />
 </main>
 
 <style>

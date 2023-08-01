@@ -15,17 +15,16 @@
 
   $: [hue, saturation, lightness] = hexToHSL(colors[mode])
 
+  // bind the input event to handleInput function and adjust the initial height
+  $: if (textarea) {
+    task.text = task.text.replace(/(\r\n|\n|\r)/gm, '')
+    textarea.addEventListener('input', handleInput)
+    handleInput() // for initial height adjustment
+  }
+
   const handleInput = () => {
     textarea.style.height = 'auto' // reset the height
     textarea.style.height = textarea.scrollHeight + 5 + 'px' // set the new height
-  }
-
-  // bind the input event to handleInput function and adjust the initial height
-  $: {
-    if (textarea) {
-      textarea.addEventListener('input', handleInput)
-      handleInput() // for initial height adjustment
-    }
   }
 
   function handlePClick() {
@@ -62,7 +61,6 @@
           bind:this="{textarea}"
           bind:value="{task.text}"
           on:keydown="{handleKeyDown}"
-          style="overflow:hidden;"
           maxlength="{maxCharacters}"
           placeholder="Add text: Enter to save"></textarea>
         <div class="character-count">

@@ -6,9 +6,9 @@
   export let setMode
 
   let times = {
-    pomodoro: 10,
+    pomodoro: 2,
     shortBreak: 2,
-    longBreak: 5
+    longBreak: 2
   }
 
   let timer: number
@@ -36,7 +36,8 @@
         } else {
           setMode('pomodoro')
         }
-        remainingTime = null // reset remainingTime when the timer reaches zero
+        time = times[mode] // set time to the new mode's time immediately
+        remainingTime = time // reset remainingTime when the timer reaches zero
       } else {
         time--
         remainingTime = time

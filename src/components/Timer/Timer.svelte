@@ -13,17 +13,14 @@
 
   let timer: number
   let timerRunning = false
+  let time: number = times[mode]
+  let remainingTime: number | null = null
 
-  $: time = times[mode]
   $: minutes = Math.floor(time / 60)
   $: seconds = time % 60
 
   function startTimer() {
-    if (timerRunning) {
-      return
-    }
-
-    time = times[mode] // reset time when the timer starts
+    time = remainingTime !== null ? remainingTime : times[mode]
     timerRunning = true
 
     timer = setInterval(() => {
@@ -39,19 +36,19 @@
         } else {
           setMode('pomodoro')
         }
-        time = times[mode] // reset time when the timer reaches zero
+        remainingTime = null // reset remainingTime when the timer reaches zero
       } else {
         time--
+        remainingTime = time
       }
     }, 1000)
   }
 
   function stopTimer() {
-    if (!timerRunning) {
-      return
+    if (timerRunning) {
+      clearInterval(timer)
+      timerRunning = false
     }
-    clearInterval(timer)
-    timerRunning = false
   }
 
   function handleClick() {
@@ -64,10 +61,21 @@
 </script>
 
 <button on:click="{handleClick}" class="{mode}" class:flash="{!timerRunning}">
-  {minutes < 10 ? '0' : ''}{minutes}:{seconds < 10 ? '0' : ''}{seconds}
+  <div>
+    {minutes < 10 ? '0' : ''}{minutes}:{seconds < 10 ? '0' : ''}{seconds}
+    <span>{mode}</span>
+  </div>
 </button>
 
 <style lang="scss">
+  div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+  }
+
   button {
     width: 250px;
     max-width: 250px;
@@ -79,6 +87,16 @@
     cursor: pointer;
     background-color: rgb(255, 104, 129);
     color: white;
+  }
+
+  span {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: normal;
+    text-transform: uppercase;
+    letter-spacing: 1px;
   }
 
   .flash {

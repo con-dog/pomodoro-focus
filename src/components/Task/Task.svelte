@@ -29,6 +29,7 @@
 
   function handlePClick() {
     editing = true
+    setTimeout(() => textarea.focus(), 0)
   }
 
   function handleKeyDown(event) {
@@ -45,7 +46,10 @@
 >
   <div class="content">
     <div class="spin-on-hover">
-      <Fa icon="{faCircleCheckEmpty}" style="font-size: 1.25rem;" />
+      <Fa
+        icon="{faCircleCheckEmpty}"
+        style="font-size: 1.25rem; font-weight: bold;"
+      />
     </div>
     {#if !editing}
       <button class="button-p" on:click="{handlePClick}">

@@ -75,15 +75,14 @@
     border: none;
     cursor: pointer;
     width: 95%;
-    transition: all 0.1s ease-in-out;
 
     &:hover {
-      transform: translateX(0.5rem);
+      outline: 2px solid white;
     }
 
-    // &:focus {
-    //   outline: 2px solid white;
-    // }
+    &:focus {
+      outline: 2px solid white;
+    }
   }
 
   .button-p {

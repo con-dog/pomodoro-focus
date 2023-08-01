@@ -56,14 +56,16 @@
     </div>
     <div class="task-wrapper">
       <AddTask addTask="{addTask}" colors="{colors}" mode="{mode}" />
-      {#each tasks as task}
-        <Task
-          colors="{colors}"
-          mode="{mode}"
-          task="{task}"
-          updateTask="{updateTask}"
-        />
-      {/each}
+      <div class="scroll-container">
+        {#each tasks as task}
+          <Task
+            colors="{colors}"
+            mode="{mode}"
+            task="{task}"
+            updateTask="{updateTask}"
+          />
+        {/each}
+      </div>
     </div>
   </div>
 </main>
@@ -106,5 +108,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+
+  .scroll-container {
+    height: 250px;
+    overflow-y: scroll;
+    &::-webkit-scrollbar {
+      width: 0;
+    }
   }
 </style>

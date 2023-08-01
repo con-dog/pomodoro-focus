@@ -104,9 +104,10 @@
     border: none;
     cursor: pointer;
     width: 95%;
+    transition: all 0.1s ease-in-out;
 
     &:hover {
-      outline: 2px solid var(--text-color);
+      transform: translateX(0.3rem);
     }
   }
 

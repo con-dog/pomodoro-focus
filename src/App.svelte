@@ -7,8 +7,6 @@
   function setMode(newMode) {
     mode = newMode
   }
-
-  $: console.log(mode, progress)
 </script>
 
 <main class="{mode}">

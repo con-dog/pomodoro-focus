@@ -67,7 +67,6 @@
   }
 
   $: [hue, saturation, lightness] = hexToHSL(colors[mode])
-  $: [flashHue, flashSaturation, flashLightness] = hexToHSL(colors.text, 0)
 </script>
 
 <button

@@ -17,7 +17,11 @@
 >
   <div class="content">
     <Fa icon="{faCircleCheckEmpty}" style="font-size: 1.25rem" />
-    <p>{task}</p>
+    <p
+      style="--flash-color: {`hsl(${hue}, ${saturation}%, ${lightness}%)`}; --text-color: {colors.text};"
+    >
+      {task}
+    </p>
   </div>
   <span>33</span>
 </button>
@@ -38,7 +42,7 @@
     transition: all 0.1s ease-in-out;
 
     &:hover {
-      transform: scale(1.1);
+      transform: scale(1.075);
     }
   }
 
@@ -54,5 +58,16 @@
     font-weight: 600;
     text-align: left;
     word-break: break-all;
+    color: var(--text-color);
+
+    &:hover {
+      animation: blinker both 1s infinite;
+    }
+
+    @keyframes blinker {
+      50% {
+        color: var(--flash-color);
+      }
+    }
   }
 </style>

@@ -8,9 +8,9 @@
   import { v4 as uuid } from 'uuid'
 
   let colors = {
-    pomodoro: '#9a031e',
-    shortBreak: '#e9c46a',
-    longBreak: '#3F88C5',
+    pomodoro: '#DB3352',
+    shortBreak: '#437ECB',
+    longBreak: '#0F8F1E',
     text: '#f3f3f3'
   }
   let mode = 'pomodoro'

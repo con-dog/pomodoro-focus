@@ -1,6 +1,6 @@
 <script lang="ts">
+  import AddTodo from './components/AddTodo/AddTodo.svelte'
   import ColorPicker from './components/ColorPicker/ColorPicker.svelte'
-  import Profile from './components/Profile/Profile.svelte'
   import Timer from './components/Timer/Timer.svelte'
 
   let colors = {
@@ -22,16 +22,19 @@
 </script>
 
 <main style="background-color: {colors[mode]}">
-  <div>
-    <nav>
+  <div class="container">
+    <div class="color-picker-wrapper">
       <ColorPicker colors="{colors}" setLabelColor="{setLabelColor}" />
-    </nav>
-    <Timer
-      colors="{colors}"
-      mode="{mode}"
-      progress="{progress}"
-      setMode="{setMode}"
-    />
+    </div>
+    <div class="timer-wrapper">
+      <Timer
+        colors="{colors}"
+        mode="{mode}"
+        progress="{progress}"
+        setMode="{setMode}"
+      />
+    </div>
+    <div class="todo-wrapper"><AddTodo colors="{colors}" mode="{mode}" /></div>
   </div>
 </main>
 
@@ -46,7 +49,7 @@
     width: 100%;
   }
 
-  div {
+  .container {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -55,9 +58,30 @@
     text-align: center;
     max-width: 280px;
     height: 100%;
+    > * {
+      width: 100%;
+    }
+    .color-picker-wrapper {
+      flex: 1;
+    }
+    .timer-wrapper {
+      flex: 3;
+    }
+    .todo-wrapper {
+      flex: 2;
+    }
+  }
+
+  .timer-wrapper,
+  .color-picker-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   nav {
+    margin: 0;
+    padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;

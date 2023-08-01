@@ -55,8 +55,6 @@
 
   input {
     visibility: hidden;
-    width: 25px;
-    height: 25px;
     padding: 0;
     margin: 0;
     appearance: none;

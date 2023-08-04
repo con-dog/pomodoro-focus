@@ -4,7 +4,7 @@
   "name": "Pomodoro Focus - Foreground Timer",
   "short_name": "Pomodoro Focus",
   "description": "Maximize productivity with a foreground Pomodoro timer that's always visible on every page and tab.",
-  "author": "developer@example.com",
+  "author": "hello@hackhive.io",
   "minimum_chrome_version": "114",
   "permissions": [
     "sidePanel"

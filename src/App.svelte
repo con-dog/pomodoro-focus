@@ -25,9 +25,9 @@
   let selectedTask
   let tasks = []
   let times = {
-    pomodoro: 4,
-    shortBreak: 3,
-    longBreak: 6
+    pomodoro: 25 * 60,
+    shortBreak: 5 * 60,
+    longBreak: 15 * 60
   }
   let time: number = times[mode]
 

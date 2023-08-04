@@ -83,6 +83,35 @@
   function toggleMute() {
     mute = !mute
   }
+
+  let draggedTaskId
+
+  function dragstart(e, id) {
+    draggedTaskId = id
+  }
+
+  function dragover(e) {
+    e.preventDefault()
+  }
+
+  function drop(e, id) {
+    e.preventDefault()
+
+    // Find the positions of the tasks in the array
+    const draggedTaskIndex = tasks.findIndex(
+      (task) => task.id === draggedTaskId
+    )
+    const targetTaskIndex = tasks.findIndex((task) => task.id === id)
+
+    // Swap the tasks
+    ;[tasks[draggedTaskIndex], tasks[targetTaskIndex]] = [
+      tasks[targetTaskIndex],
+      tasks[draggedTaskIndex]
+    ]
+
+    // Force Svelte to update the state
+    tasks = tasks
+  }
 </script>
 
 <main style="background-color: {colors[mode]}">
@@ -110,6 +139,10 @@
           <div
             in:fly="{{ y: -200, duration: 500 }}"
             out:fly="{{ y: -200, duration: 500 }}"
+            draggable="true"
+            on:dragstart="{(e) => dragstart(e, task.id)}"
+            on:dragover="{dragover}"
+            on:drop="{(e) => drop(e, task.id)}"
           >
             <Task
               id="{task.id}"

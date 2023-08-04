@@ -14,10 +14,14 @@
     longBreak: '#0F8F1E',
     text: '#f3f3f3'
   }
+  let draggedTaskId
   let mode = 'pomodoro'
   let mute = false
   let progress = 0
   let scrollContainer
+  const scrollSensitivity = 50 // Within 50px of edge
+  const scrollSpeed = 5 // Scroll 5px per tick
+  let scrollInterval
   let selectedTask
   let tasks = []
   let times = {
@@ -84,8 +88,6 @@
     mute = !mute
   }
 
-  let draggedTaskId
-
   function dragstart(e, id) {
     draggedTaskId = id
   }
@@ -112,6 +114,37 @@
     // Force Svelte to update the state
     tasks = tasks
   }
+
+  function handleDragOverContainer(e) {
+    const rect = scrollContainer.getBoundingClientRect()
+
+    // Clear any existing scroll interval
+    if (scrollInterval) {
+      clearInterval(scrollInterval)
+      scrollInterval = null
+    }
+
+    // If we're within scrollSensitivity distance from the top or bottom edge
+    if (e.clientY - rect.top < scrollSensitivity) {
+      // Set up an interval to scroll up every tick
+      scrollInterval = setInterval(() => {
+        scrollContainer.scrollTop -= scrollSpeed
+      }, 1000 / 60) // 60fps
+    } else if (rect.bottom - e.clientY < scrollSensitivity) {
+      // Set up an interval to scroll down every tick
+      scrollInterval = setInterval(() => {
+        scrollContainer.scrollTop += scrollSpeed
+      }, 1000 / 60) // 60fps
+    }
+  }
+
+  function handleDragEnd(e) {
+    // When the dragging ends, clear any potential scroll interval
+    if (scrollInterval) {
+      clearInterval(scrollInterval)
+      scrollInterval = null
+    }
+  }
 </script>
 
 <main style="background-color: {colors[mode]}">
@@ -134,7 +167,13 @@
     </div>
     <div class="task-wrapper">
       <AddTask addTask="{addTask}" colors="{colors}" mode="{mode}" />
-      <div bind:this="{scrollContainer}" class="scroll-container">
+      <div
+        bind:this="{scrollContainer}"
+        class="scroll-container"
+        on:dragover="{handleDragOverContainer}"
+        on:dragend="{handleDragEnd}"
+        on:drop="{handleDragEnd}"
+      >
         {#each tasks as task (task.id)}
           <div
             in:fly="{{ y: -200, duration: 500 }}"

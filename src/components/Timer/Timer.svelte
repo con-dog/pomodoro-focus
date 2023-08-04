@@ -10,6 +10,7 @@
 
   export let colors
   export let mode
+  export let mute
   export let progress
   export let selectedTask
   export let setMode
@@ -18,8 +19,6 @@
 
   let timer: number
   let timerRunning = false
-  let remainingTime: number | null = null
-
   let sound = new Howl({
     src: [ping]
   })
@@ -32,7 +31,7 @@
 
     timer = setInterval(() => {
       if (time === 0) {
-        sound.play()
+        if (!mute) sound.play()
         stopTimer()
         if (mode === 'pomodoro') {
           if (selectedTask) updateTaskProgress(selectedTask)
@@ -120,7 +119,10 @@
     border: none;
     border-radius: 25px;
     cursor: pointer;
-    color: white;
+
+    &:focus {
+      outline: none;
+    }
   }
 
   div {

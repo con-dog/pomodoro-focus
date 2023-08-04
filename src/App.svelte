@@ -3,6 +3,7 @@
   import ColorPicker from './components/ColorPicker/ColorPicker.svelte'
   import Task from './components/Task/Task.svelte'
   import Timer from './components/Timer/Timer.svelte'
+  import Volume from './components/Volume/Volume.svelte'
   import { tick } from 'svelte'
   import { fly } from 'svelte/transition'
   import { v4 as uuid } from 'uuid'
@@ -14,13 +15,14 @@
     text: '#f3f3f3'
   }
   let mode = 'pomodoro'
+  let mute = false
   let progress = 0
   let scrollContainer
   let selectedTask
   let tasks = []
   let times = {
-    pomodoro: 2,
-    shortBreak: 4,
+    pomodoro: 4,
+    shortBreak: 3,
     longBreak: 6
   }
   let time: number = times[mode]
@@ -77,17 +79,23 @@
   function setSelectedTask(id) {
     selectedTask = id
   }
+
+  function toggleMute() {
+    mute = !mute
+  }
 </script>
 
 <main style="background-color: {colors[mode]}">
   <div class="container">
-    <div class="color-picker-wrapper">
+    <div class="header-wrapper">
       <ColorPicker colors="{colors}" setLabelColor="{setLabelColor}" />
+      <Volume colors="{colors}" mute="{mute}" toggleMute="{toggleMute}" />
     </div>
     <div class="timer-wrapper">
       <Timer
         colors="{colors}"
         mode="{mode}"
+        mute="{mute}"
         progress="{progress}"
         selectedTask="{selectedTask}"
         setMode="{setMode}"
@@ -143,7 +151,7 @@
     > * {
       width: 100%;
     }
-    .color-picker-wrapper {
+    .header-wrapper {
       flex: 1;
     }
     .timer-wrapper {
@@ -154,9 +162,10 @@
     }
   }
 
-  .color-picker-wrapper {
+  .header-wrapper {
     display: flex;
-    justify-content: center;
+    padding: 0 1rem;
+    justify-content: space-between;
     align-items: center;
   }
 

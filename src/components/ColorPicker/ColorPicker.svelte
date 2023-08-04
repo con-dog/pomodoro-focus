@@ -39,7 +39,8 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    width: 100px;
+    flex-wrap: wrap;
+    width: 50px;
     height: 50px;
   }
 

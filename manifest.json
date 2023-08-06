@@ -3,9 +3,15 @@
   "version": "1.0.1",
   "name": "Pomodoro Focus - Foreground Timer",
   "short_name": "Pomodoro Focus",
-  "description": "Maximize productivity with a foreground Pomodoro timer that's always visible on every page and tab.",
+  "description": "Maximize productivity with the only foreground Pomodoro timer that's visible on every page and tab.",
   "author": "hello@hackhive.io",
   "minimum_chrome_version": "114",
+  "icons": {
+    "16": "extension/icons/Pomodoro-Focus-Icon-Design-01.png",
+    "32": "extension/icons/Pomodoro-Focus-Icon-Design-02.png",
+    "48": "extension/icons/Pomodoro-Focus-Icon-Design-03.png",
+    "128": "extension/icons/Pomodoro-Focus-Icon-Design-04.png"
+  },
   "permissions": [
     "sidePanel"
   ],

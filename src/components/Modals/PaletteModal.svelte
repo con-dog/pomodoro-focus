@@ -10,8 +10,9 @@
   $: if (dialog && showPaletteModal) dialog.showModal()
 </script>
 
-<!-- svelte-ignore a11y-click-events-have-key-events -->
+<!-- svelte-ignore a11y-click-events-have-key-events a11y-no-noninteractive-element-interactions-->
 <dialog bind:this="{dialog}" on:close on:click|self="{() => dialog.close()}">
+  <!-- svelte-ignore a11y-no-static-element-interactions -->
   <div on:click|stopPropagation>
     <ColorPicker colors="{colors}" setLabelColor="{setLabelColor}" />
     <!-- svelte-ignore a11y-autofocus -->

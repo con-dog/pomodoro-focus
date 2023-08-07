@@ -4,18 +4,32 @@
   export let times
 
   let dialog // HTMLDialogElement
+  let form
   let pomdoroSlider
   let shortBreakSlider
   let longBreakSlider
 
   $: if (dialog && showSliderModal) dialog.showModal()
+
+  // Function to check if the form is valid
+  const isFormValid = () => {
+    return form.checkValidity()
+  }
+
+  // Function to handle the button click
+  const handleButtonClick = (e) => {
+    if (isFormValid()) {
+      e.preventDefault()
+      dialog.close()
+    }
+  }
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
 <dialog bind:this="{dialog}" on:close on:click|self="{() => dialog.close()}">
   <!-- svelte-ignore a11y-no-static-element-interactions -->
-  <div on:click|stopPropagation class="container">
+  <form on:click|stopPropagation class="container" bind:this="{form}">
     <!-- svelte-ignore a11y-autofocus -->
     <div>
       <div class="row">
@@ -29,7 +43,7 @@
           name="pomodoro"
           min="1"
           max="60"
-        />
+        /><span class="validity"></span>
       </div>
       <div class="row">
         <label for="shortbreak">SHORTBREAK</label>
@@ -43,7 +57,7 @@
           name="shortbreak"
           min="1"
           max="60"
-        />
+        /><span class="validity"></span>
       </div>
       <div class="row">
         <label for="longbreak">LONGBREAK</label>
@@ -57,14 +71,21 @@
           name="longbreak"
           min="1"
           max="60"
-        />
+        /><span class="validity"></span>
       </div>
     </div>
-    <button class="neutral" on:click="{() => dialog.close()}">Okay</button>
-  </div>
+    <button class="neutral" on:click="{handleButtonClick}">Okay</button>
+  </form>
 </dialog>
 
 <style>
+  input:invalid + span::after {
+    content: '✖';
+  }
+
+  input:valid + span::after {
+    content: '✓';
+  }
   .neutral {
     font-family: sans-serif;
     width: 100%;

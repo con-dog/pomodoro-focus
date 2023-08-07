@@ -18,12 +18,12 @@
     <h2>⚡Supercharge⚡ Your Focus</h2>
     <ul>
       <li>♾️ Unlimited tasks</li>
-      <li>💾 Tasks get saved</li>
-      <li>⌛ Custom times</li>
-      <li>🎨 Custom colours</li>
+      <li>💾 Save tasks</li>
+      <li>⌛ Customize times</li>
+      <li>🎨 Customize colours</li>
     </ul>
     <div class="button-wrapper">
-      <button class="green">Go PRO for $5</button>
+      <button class="green">Go PRO for $6</button>
       <button class="neutral" on:click="{() => dialog.close()}">Cancel</button>
     </div>
   </div>

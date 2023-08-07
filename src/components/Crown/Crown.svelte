@@ -2,12 +2,13 @@
   import Fa from 'svelte-fa'
   import { faCrown } from '@fortawesome/free-solid-svg-icons'
 
+  export let handleCrownModal
   export let colors
   export let mode
 </script>
 
 <div class="wrapper">
-  <button>
+  <button on:click="{handleCrownModal}">
     <Fa
       icon="{faCrown}"
       style="color: {['#DB3352', '#437ECB', '#0F8F1E'].includes(colors[mode])

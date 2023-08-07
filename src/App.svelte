@@ -18,6 +18,7 @@
   */
   import AddTask from './components/AddTask/AddTask.svelte'
   import Crown from './components/Crown/Crown.svelte'
+  import CrownModal from './components/Modals/CrownModal.svelte'
   import PaletteModal from './components/Modals/PaletteModal.svelte'
   import Palette from './components/Palette/Palette.svelte'
   import Slider from './components/Slider/Slider.svelte'
@@ -45,6 +46,7 @@
   const scrollSpeed = 5 // Scroll 5px per tick
   let scrollInterval
   let selectedTask
+  let showCrownModal = false
   let showPaletteModal = false
   let showSliderModal = false
   let tasks = []
@@ -173,6 +175,10 @@
     }
   }
 
+  function handleCrownModal() {
+    showCrownModal = true
+  }
+
   function handlePaletteModal() {
     showPaletteModal = true
   }
@@ -189,6 +195,12 @@
 
 <main style="background-color: {colors[mode]}">
   <div class="container">
+    <CrownModal
+      showCrownModal="{showCrownModal}"
+      on:close="{() => {
+        showCrownModal = false
+      }}"
+    />
     <PaletteModal
       colors="{colors}"
       setLabelColor="{setLabelColor}"
@@ -223,7 +235,11 @@
           mute="{mute}"
           toggleMute="{toggleMute}"
         />
-        <Crown colors="{colors}" mode="{mode}" />
+        <Crown
+          colors="{colors}"
+          mode="{mode}"
+          handleCrownModal="{handleCrownModal}"
+        />
       </div>
     </div>
     <div class="timer-wrapper">

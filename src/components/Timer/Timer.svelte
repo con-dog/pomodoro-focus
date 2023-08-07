@@ -17,13 +17,13 @@
   export let time: number
   export let updateTaskProgress
 
-  let timeAsSeconds = time * 60
   let timer: number
   let timerRunning = false
   let sound = new Howl({
     src: [ping]
   })
 
+  $: timeAsSeconds = time * 60
   $: minutes = Math.floor(timeAsSeconds / 60)
   $: seconds = timeAsSeconds % 60
 

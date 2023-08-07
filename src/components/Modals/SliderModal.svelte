@@ -1,5 +1,6 @@
 <script>
-  export let showSliderModal // boolean
+  export let handleTimeChange
+  export let showSliderModal
   export let times
 
   let dialog // HTMLDialogElement
@@ -11,7 +12,9 @@
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
+<!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
 <dialog bind:this="{dialog}" on:close on:click|self="{() => dialog.close()}">
+  <!-- svelte-ignore a11y-no-static-element-interactions -->
   <div on:click|stopPropagation class="container">
     <!-- svelte-ignore a11y-autofocus -->
     <div>
@@ -19,40 +22,45 @@
         <label for="pomodoro">POMDORO</label>
         <input
           bind:this="{pomdoroSlider}"
+          bind:value="{times.pomodoro}"
+          on:change="{() => handleTimeChange(pomdoroSlider.value, 'pomodoro')}"
           type="number"
           id="pomdoro"
           name="pomodoro"
           min="1"
           max="60"
-          value="{times.pomodoro}"
         />
       </div>
       <div class="row">
         <label for="shortbreak">SHORTBREAK</label>
         <input
           bind:this="{shortBreakSlider}"
+          bind:value="{times.shortBreak}"
+          on:change="{() =>
+            handleTimeChange(shortBreakSlider.value, 'shortBreak')}"
           type="number"
           id="shortbreak"
           name="shortbreak"
           min="1"
           max="60"
-          value="{times.shortBreak}"
         />
       </div>
       <div class="row">
         <label for="longbreak">LONGBREAK</label>
         <input
           bind:this="{longBreakSlider}"
+          bind:value="{times.longBreak}"
+          on:change="{() =>
+            handleTimeChange(longBreakSlider.value, 'longBreak')}"
           type="number"
           id="longbreak"
           name="longbreak"
           min="1"
           max="60"
-          value="{times.longBreak}"
         />
       </div>
     </div>
-    <button autofocus on:click="{() => dialog.close()}">OKAY</button>
+    <button on:click="{() => dialog.close()}">OKAY</button>
   </div>
 </dialog>
 

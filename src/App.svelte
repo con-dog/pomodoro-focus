@@ -45,13 +45,16 @@
   const scrollSpeed = 5 // Scroll 5px per tick
   let scrollInterval
   let selectedTask
+  let showPaletteModal = false
+  let showSliderModal = false
   let tasks = []
-  let times = {
+
+  $: times = {
     pomodoro: 25,
     shortBreak: 5,
     longBreak: 15
   }
-  let time: number = times[mode]
+  $: time = times[mode]
 
   $: [hue, saturation, lightness] = hexToHSL(colors[mode])
 
@@ -170,15 +173,17 @@
     }
   }
 
-  let showPaletteModal = false
-  let showSliderModal = false
-
   function handlePaletteModal() {
     showPaletteModal = true
   }
 
   function handleSliderModal() {
     showSliderModal = true
+  }
+
+  function handleTimeChange(value, target) {
+    console.log('here')
+    times[target] = value
   }
 </script>
 
@@ -193,6 +198,7 @@
       }}"
     />
     <SliderModal
+      handleTimeChange="{handleTimeChange}"
       showSliderModal="{showSliderModal}"
       times="{times}"
       on:close="{() => {
@@ -234,6 +240,7 @@
     </div>
     <div class="task-wrapper">
       <AddTask addTask="{addTask}" colors="{colors}" mode="{mode}" />
+      <!-- svelte-ignore a11y-no-static-element-interactions -->
       <div
         bind:this="{scrollContainer}"
         class="scroll-container"

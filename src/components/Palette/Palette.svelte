@@ -1,19 +1,15 @@
 <script lang="ts">
   import Fa from 'svelte-fa'
-  import {
-    faVolumeHigh,
-    faVolumeXmark
-  } from '@fortawesome/free-solid-svg-icons'
+  import { faBrush } from '@fortawesome/free-solid-svg-icons'
 
   export let colors
+  export let handlePaletteButtonClick
   export let mode
-  export let mute
-  export let toggleMute
 </script>
 
 <div class="wrapper">
-  <button on:click="{toggleMute}" style="color: {colors[mode]}">
-    <Fa icon="{mute ? faVolumeXmark : faVolumeHigh}" />
+  <button on:click="{handlePaletteButtonClick}">
+    <Fa icon="{faBrush}" style="color: {colors[mode]}" />
   </button>
 </div>
 

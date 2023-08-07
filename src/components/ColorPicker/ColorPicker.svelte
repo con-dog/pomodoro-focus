@@ -3,45 +3,65 @@
   export let setLabelColor
 </script>
 
-<div>
-  <label style="background-color: {colors['pomodoro']}">
-    <input
-      type="color"
-      value="{colors['pomodoro']}"
-      on:change="{(e) => setLabelColor(e, 'pomodoro')}"
-    />
-  </label>
-  <label style="background-color: {colors['shortBreak']}">
-    <input
-      type="color"
-      value="{colors['shortBreak']}"
-      on:change="{(e) => setLabelColor(e, 'shortBreak')}"
-    />
-  </label>
-  <label style="background-color: {colors['longBreak']}">
-    <input
-      type="color"
-      value="{colors['longBreak']}"
-      on:change="{(e) => setLabelColor(e, 'longBreak')}"
-    />
-  </label>
-  <label style="background-color: {colors['text']}">
-    <input
-      type="color"
-      value="{colors['text']}"
-      on:change="{(e) => setLabelColor(e, 'text')}"
-    />
-  </label>
+<div class="container">
+  <div class="row">
+    <label style="background-color: {colors['pomodoro']}">
+      <input
+        type="color"
+        value="{colors['pomodoro']}"
+        on:change="{(e) => setLabelColor(e, 'pomodoro')}"
+      />
+    </label>
+    <p class="mode">POMODORO</p>
+  </div>
+  <div class="row">
+    <label style="background-color: {colors['shortBreak']}">
+      <input
+        type="color"
+        value="{colors['shortBreak']}"
+        on:change="{(e) => setLabelColor(e, 'shortBreak')}"
+      />
+    </label>
+    <p class="mode">SHORTBREAK</p>
+  </div>
+  <div class="row">
+    <label style="background-color: {colors['longBreak']}">
+      <input
+        type="color"
+        value="{colors['longBreak']}"
+        on:change="{(e) => setLabelColor(e, 'longBreak')}"
+      />
+    </label>
+    <p class="mode">LONGBREAK</p>
+  </div>
+  <div class="row">
+    <label style="background-color: {colors['text']}">
+      <input
+        type="color"
+        value="{colors['text']}"
+        on:change="{(e) => setLabelColor(e, 'text')}"
+      />
+    </label>
+    <p class="mode">TEXT</p>
+  </div>
 </div>
 
 <style lang="scss">
-  div {
+  .container {
     display: flex;
+    flex-direction: column;
     justify-content: space-around;
-    align-items: center;
-    flex-wrap: wrap;
-    width: 50px;
+    gap: 0.5rem;
+    align-items: flex-start;
     height: 50px;
+  }
+
+  .row {
+    display: flex;
+    justify-content: flex-start;
+    gap: 0.5rem;
+    align-items: center;
+    width: 100%;
   }
 
   label {
@@ -53,6 +73,16 @@
     width: 20px;
     border: 2px solid white;
     border-radius: 5px;
+  }
+
+  .mode {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: normal;
+    text-transform: uppercase;
+    letter-spacing: 1px;
   }
 
   input {

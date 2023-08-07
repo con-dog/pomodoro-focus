@@ -1,11 +1,14 @@
 <script lang="ts">
   import Fa from 'svelte-fa'
   import { faCrown } from '@fortawesome/free-solid-svg-icons'
+
+  export let colors
+  export let mode
 </script>
 
 <div class="wrapper">
   <button>
-    <Fa icon="{faCrown}" style="color: white;" />
+    <Fa icon="{faCrown}" style="color: {colors[mode]}" />
   </button>
 </div>
 
@@ -28,5 +31,9 @@
     outline: none;
     padding: 0;
     transition: color 0.2s ease-in-out;
+
+    &:hover {
+      transform: scale(1.2);
+    }
   }
 </style>

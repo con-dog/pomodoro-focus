@@ -17,14 +17,16 @@
   Date: 08.06.2023 deviceview | Connor Talbot | Auckland, New Zealand
   */
   import AddTask from './components/AddTask/AddTask.svelte'
-  import ColorPicker from './components/ColorPicker/ColorPicker.svelte'
   import Crown from './components/Crown/Crown.svelte'
+  import Palette from './components/Palette/Palette.svelte'
+  import Slider from './components/Slider/Slider.svelte'
   import Task from './components/Task/Task.svelte'
   import Timer from './components/Timer/Timer.svelte'
   import Volume from './components/Volume/Volume.svelte'
   import { tick } from 'svelte'
   import { fly } from 'svelte/transition'
   import { v4 as uuid } from 'uuid'
+  import hexToHSL from './helpers/hexToHSL'
 
   let colors = {
     pomodoro: '#DB3352',
@@ -48,6 +50,8 @@
     longBreak: 15 * 60
   }
   let time: number = times[mode]
+
+  $: [hue, saturation, lightness] = hexToHSL(colors[mode])
 
   function setMode(newMode: string) {
     mode = newMode
@@ -163,14 +167,33 @@
       scrollInterval = null
     }
   }
+
+  let paletteDialog
+
+  function handlePaletteButtonClick() {
+    console.log('gere')
+    paletteDialog.showModal()
+  }
 </script>
 
 <main style="background-color: {colors[mode]}">
   <div class="container">
     <div class="header-wrapper">
-      <ColorPicker colors="{colors}" setLabelColor="{setLabelColor}" />
-      <Volume colors="{colors}" mute="{mute}" toggleMute="{toggleMute}" />
-      <Crown />
+      <div class="header" style="background-color: {colors.text}">
+        <Palette
+          colors="{colors}"
+          mode="{mode}"
+          handlePaletteButtonClick="{handlePaletteButtonClick}"
+        />
+        <Slider colors="{colors}" mode="{mode}" />
+        <Volume
+          colors="{colors}"
+          mode="{mode}"
+          mute="{mute}"
+          toggleMute="{toggleMute}"
+        />
+        <Crown colors="{colors}" mode="{mode}" />
+      </div>
     </div>
     <div class="timer-wrapper">
       <Timer
@@ -258,6 +281,15 @@
     padding: 0 1rem;
     justify-content: space-between;
     align-items: center;
+  }
+
+  .header {
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    border-radius: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
   }
 
   .scroll-container {

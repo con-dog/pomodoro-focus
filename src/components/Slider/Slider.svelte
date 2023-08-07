@@ -3,11 +3,12 @@
   import { faSliders } from '@fortawesome/free-solid-svg-icons'
 
   export let colors
+  export let handleSliderModal
   export let mode
 </script>
 
 <div class="wrapper">
-  <button>
+  <button on:click="{handleSliderModal}">
     <Fa icon="{faSliders}" style="color: {colors[mode]}" />
   </button>
 </div>

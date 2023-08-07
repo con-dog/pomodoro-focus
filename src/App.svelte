@@ -21,6 +21,7 @@
   import PaletteModal from './components/Modals/PaletteModal.svelte'
   import Palette from './components/Palette/Palette.svelte'
   import Slider from './components/Slider/Slider.svelte'
+  import SliderModal from './components/Modals/SliderModal.svelte'
   import Task from './components/Task/Task.svelte'
   import Timer from './components/Timer/Timer.svelte'
   import Volume from './components/Volume/Volume.svelte'
@@ -46,9 +47,9 @@
   let selectedTask
   let tasks = []
   let times = {
-    pomodoro: 25 * 60,
-    shortBreak: 5 * 60,
-    longBreak: 15 * 60
+    pomodoro: 25,
+    shortBreak: 5,
+    longBreak: 15
   }
   let time: number = times[mode]
 
@@ -170,9 +171,14 @@
   }
 
   let showPaletteModal = false
+  let showSliderModal = false
 
   function handlePaletteModal() {
     showPaletteModal = true
+  }
+
+  function handleSliderModal() {
+    showSliderModal = true
   }
 </script>
 
@@ -186,6 +192,13 @@
         showPaletteModal = false
       }}"
     />
+    <SliderModal
+      showSliderModal="{showSliderModal}"
+      times="{times}"
+      on:close="{() => {
+        showSliderModal = false
+      }}"
+    />
     <div class="header-wrapper">
       <div class="header" style="background-color: {colors.text}">
         <Palette
@@ -193,7 +206,11 @@
           mode="{mode}"
           handlePaletteModal="{handlePaletteModal}"
         />
-        <Slider colors="{colors}" mode="{mode}" />
+        <Slider
+          colors="{colors}"
+          mode="{mode}"
+          handleSliderModal="{handleSliderModal}"
+        />
         <Volume
           colors="{colors}"
           mode="{mode}"

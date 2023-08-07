@@ -75,13 +75,11 @@
   }
 
   .mode {
+    font-family: sans-serif;
     margin: 0;
-    padding: 0;
+    padding: 0 0.5rem;
     text-align: center;
-    font-size: 1rem;
-    font-weight: normal;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+    font-size: 1.5rem;
   }
 
   input {

@@ -28,7 +28,7 @@
     padding: 0;
   }
   dialog::backdrop {
-    background: rgba(0, 0, 0, 0.75);
+    background: rgba(0, 0, 0, 0.85);
   }
   dialog > div {
     display: flex;

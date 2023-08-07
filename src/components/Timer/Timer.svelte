@@ -17,20 +17,21 @@
   export let time: number
   export let updateTaskProgress
 
+  let timeAsSeconds = time * 60
   let timer: number
   let timerRunning = false
   let sound = new Howl({
     src: [ping]
   })
 
-  $: minutes = Math.floor(time / 60)
-  $: seconds = time % 60
+  $: minutes = Math.floor(timeAsSeconds / 60)
+  $: seconds = timeAsSeconds % 60
 
   function startTimer() {
     timerRunning = true
 
     timer = setInterval(() => {
-      if (time === 0) {
+      if (timeAsSeconds === 0) {
         if (!mute) sound.play()
         stopTimer()
         if (mode === 'pomodoro') {
@@ -45,7 +46,7 @@
           setMode('pomodoro')
         }
       } else {
-        time--
+        timeAsSeconds--
       }
     }, 1000)
   }

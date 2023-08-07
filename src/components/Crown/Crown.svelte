@@ -11,7 +11,7 @@
   <button on:click="{handleCrownModal}">
     <Fa
       icon="{faCrown}"
-      style="color: {['#DB3352', '#437ECB', '#0F8F1E'].includes(colors[mode])
+      style="color: {['#f3f3f3'].includes(colors.text)
         ? '#fcc200'
         : colors[mode]}"
     />

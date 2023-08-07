@@ -8,7 +8,12 @@
 
 <div class="wrapper">
   <button>
-    <Fa icon="{faCrown}" style="color: {colors[mode]}" />
+    <Fa
+      icon="{faCrown}"
+      style="color: {['#DB3352', '#437ECB', '#0F8F1E'].includes(colors[mode])
+        ? '#fcc200'
+        : colors[mode]}"
+    />
   </button>
 </div>
 

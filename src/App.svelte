@@ -188,7 +188,6 @@
   }
 
   function handleTimeChange(value, target) {
-    console.log('here')
     times[target] = value
   }
 </script>

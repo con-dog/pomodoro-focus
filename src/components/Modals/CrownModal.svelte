@@ -17,8 +17,8 @@
     <!-- svelte-ignore a11y-autofocus -->
     <h2>⚡Supercharge⚡ Your Focus</h2>
     <ul>
-      <li>💾 Save your tasks</li>
       <li>♾️ Unlimited tasks</li>
+      <li>💾 Tasks get saved</li>
       <li>⌛ Custom times</li>
       <li>🎨 Custom colours</li>
     </ul>
@@ -52,6 +52,11 @@
     font-size: 1.2rem;
     font-weight: 700;
     background-color: #00b894;
+    transition: transform 0.2s ease-out;
+
+    &:hover {
+      transform: scale(1.2);
+    }
   }
 
   .neutral {

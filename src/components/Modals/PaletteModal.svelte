@@ -16,11 +16,25 @@
   <div on:click|stopPropagation>
     <ColorPicker colors="{colors}" setLabelColor="{setLabelColor}" />
     <!-- svelte-ignore a11y-autofocus -->
-    <button autofocus on:click="{() => dialog.close()}">OKAY</button>
+    <button class="neutral" autofocus on:click="{() => dialog.close()}">
+      Okay
+    </button>
   </div>
 </dialog>
 
 <style>
+  .neutral {
+    font-family: sans-serif;
+    width: 100%;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+    background-color: #636e72;
+  }
+
   dialog {
     max-width: 280px;
     min-width: 200px;
@@ -28,9 +42,11 @@
     border: none;
     padding: 0;
   }
+
   dialog::backdrop {
     background: rgba(0, 0, 0, 0.75);
   }
+
   dialog > div {
     display: flex;
     flex-direction: column;
@@ -39,9 +55,11 @@
     gap: 2rem;
     padding: 2rem;
   }
+
   dialog[open] {
     animation: zoom 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
+
   @keyframes zoom {
     from {
       transform: scale(0.95);
@@ -50,9 +68,11 @@
       transform: scale(1);
     }
   }
+
   dialog[open]::backdrop {
     animation: fade 0.2s ease-out;
   }
+
   @keyframes fade {
     from {
       opacity: 0;
@@ -60,8 +80,5 @@
     to {
       opacity: 1;
     }
-  }
-  button {
-    display: block;
   }
 </style>

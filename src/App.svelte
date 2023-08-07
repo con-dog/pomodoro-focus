@@ -18,6 +18,7 @@
   */
   import AddTask from './components/AddTask/AddTask.svelte'
   import Crown from './components/Crown/Crown.svelte'
+  import PaletteModal from './components/Modals/PaletteModal.svelte'
   import Palette from './components/Palette/Palette.svelte'
   import Slider from './components/Slider/Slider.svelte'
   import Task from './components/Task/Task.svelte'
@@ -168,22 +169,29 @@
     }
   }
 
-  let paletteDialog
+  let showPaletteModal = false
 
-  function handlePaletteButtonClick() {
-    console.log('gere')
-    paletteDialog.showModal()
+  function handlePaletteModal() {
+    showPaletteModal = true
   }
 </script>
 
 <main style="background-color: {colors[mode]}">
   <div class="container">
+    <PaletteModal
+      colors="{colors}"
+      setLabelColor="{setLabelColor}"
+      showPaletteModal="{showPaletteModal}"
+      on:close="{() => {
+        showPaletteModal = false
+      }}"
+    />
     <div class="header-wrapper">
       <div class="header" style="background-color: {colors.text}">
         <Palette
           colors="{colors}"
           mode="{mode}"
-          handlePaletteButtonClick="{handlePaletteButtonClick}"
+          handlePaletteModal="{handlePaletteModal}"
         />
         <Slider colors="{colors}" mode="{mode}" />
         <Volume

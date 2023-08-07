@@ -3,12 +3,12 @@
   import { faBrush } from '@fortawesome/free-solid-svg-icons'
 
   export let colors
-  export let handlePaletteButtonClick
   export let mode
+  export let handlePaletteModal
 </script>
 
 <div class="wrapper">
-  <button on:click="{handlePaletteButtonClick}">
+  <button on:click="{handlePaletteModal}">
     <Fa icon="{faBrush}" style="color: {colors[mode]}" />
   </button>
 </div>

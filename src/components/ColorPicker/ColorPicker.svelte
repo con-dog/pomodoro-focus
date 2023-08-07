@@ -53,7 +53,6 @@
     justify-content: space-around;
     gap: 0.5rem;
     align-items: flex-start;
-    height: 50px;
   }
 
   .row {

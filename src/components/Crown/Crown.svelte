@@ -1,0 +1,32 @@
+<script lang="ts">
+  import Fa from 'svelte-fa'
+  import { faCrown } from '@fortawesome/free-solid-svg-icons'
+</script>
+
+<div class="wrapper">
+  <button>
+    <Fa icon="{faCrown}" style="color: white;" />
+  </button>
+</div>
+
+<style lang="scss">
+  .wrapper {
+    align-items: center;
+    display: flex;
+    height: 50px;
+    width: 50px;
+    justify-content: center;
+    margin: 0;
+  }
+
+  button {
+    width: 100%;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+    outline: none;
+    padding: 0;
+    transition: color 0.2s ease-in-out;
+  }
+</style>

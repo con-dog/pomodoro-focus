@@ -18,6 +18,7 @@
   */
   import AddTask from './components/AddTask/AddTask.svelte'
   import ColorPicker from './components/ColorPicker/ColorPicker.svelte'
+  import Crown from './components/Crown/Crown.svelte'
   import Task from './components/Task/Task.svelte'
   import Timer from './components/Timer/Timer.svelte'
   import Volume from './components/Volume/Volume.svelte'
@@ -169,6 +170,7 @@
     <div class="header-wrapper">
       <ColorPicker colors="{colors}" setLabelColor="{setLabelColor}" />
       <Volume colors="{colors}" mute="{mute}" toggleMute="{toggleMute}" />
+      <Crown />
     </div>
     <div class="timer-wrapper">
       <Timer

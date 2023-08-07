@@ -21,3 +21,8 @@ Date: 08.06.2023 deviceview | Connor Talbot | Auckland, New Zealand
 chrome.sidePanel
   .setPanelBehavior({ openPanelOnActionClick: true })
   .catch((error) => console.error(error));
+
+chrome.identity.getProfileUserInfo((userInfo) => {
+  console.log(userInfo);
+  // send this data to the side panel
+});

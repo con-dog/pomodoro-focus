@@ -13,6 +13,8 @@
     "128": "extension/icons/Pomodoro-Focus-Icon-Design-04.png"
   },
   "permissions": [
+    "identity",
+    "identity.email",
     "sidePanel"
   ],
   "side_panel": {

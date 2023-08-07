@@ -79,7 +79,7 @@
     margin: 0;
     padding: 0 0.5rem;
     text-align: center;
-    font-size: 1.5rem;
+    font-size: 1.25rem;
   }
 
   input {

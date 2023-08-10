@@ -1,9 +1,9 @@
 {
   "manifest_version": 3,
-  "version": "1.0.1",
-  "name": "Pomodoro Focus - Foreground Timer",
-  "short_name": "Pomodoro Focus",
-  "description": "Maximize productivity with the only foreground Pomodoro timer that's visible on every page and tab.",
+  "version": "2.0.1",
+  "name": "Pomodoro Focus - Task Management",
+  "short_name": "Pomodoro Focus Task Management",
+  "description": "Maximize productivity with an ever-visible foreground timer plus personalized task management on every tab.",
   "author": "hello@hackhive.io",
   "minimum_chrome_version": "114",
   "icons": {
@@ -19,7 +19,7 @@
     "default_path": "dist/index.html"
   },
   "action": {
-    "default_title": "Click to open 'Pomodoro Focus' in-page timer"
+    "default_title": "Click to open 'Pomodoro Focus - Task Management' in-page timer"
   },
   "background": {
     "service_worker": "scripts/service-worker/service-worker.js"

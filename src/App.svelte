@@ -17,8 +17,6 @@
   Date: 08.06.2023 deviceview | Connor Talbot | Auckland, New Zealand
   */
   import AddTask from './components/AddTask/AddTask.svelte'
-  import Crown from './components/Crown/Crown.svelte'
-  import CrownModal from './components/Modals/CrownModal.svelte'
   import PaletteModal from './components/Modals/PaletteModal.svelte'
   import Palette from './components/Palette/Palette.svelte'
   import Slider from './components/Slider/Slider.svelte'
@@ -193,12 +191,6 @@
 
 <main style="background-color: {colors[mode]}">
   <div class="container">
-    <CrownModal
-      showCrownModal="{showCrownModal}"
-      on:close="{() => {
-        showCrownModal = false
-      }}"
-    />
     <PaletteModal
       colors="{colors}"
       setLabelColor="{setLabelColor}"
@@ -232,11 +224,6 @@
           mode="{mode}"
           mute="{mute}"
           toggleMute="{toggleMute}"
-        />
-        <Crown
-          colors="{colors}"
-          mode="{mode}"
-          handleCrownModal="{handleCrownModal}"
         />
       </div>
     </div>

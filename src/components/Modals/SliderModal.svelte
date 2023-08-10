@@ -27,51 +27,58 @@
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
-<dialog bind:this="{dialog}" on:close on:click|self="{() => dialog.close()}">
+<dialog bind:this="{dialog}">
   <!-- svelte-ignore a11y-no-static-element-interactions -->
   <form on:click|stopPropagation class="container" bind:this="{form}">
     <!-- svelte-ignore a11y-autofocus -->
     <div>
       <div class="row">
         <label for="pomodoro">POMDORO</label>
-        <input
-          bind:this="{pomdoroSlider}"
-          bind:value="{times.pomodoro}"
-          on:change="{() => handleTimeChange(pomdoroSlider.value, 'pomodoro')}"
-          type="number"
-          id="pomdoro"
-          name="pomodoro"
-          min="1"
-          max="60"
-        /><span class="validity"></span>
+        <div class="gap">
+          <input
+            bind:this="{pomdoroSlider}"
+            bind:value="{times.pomodoro}"
+            on:change="{() =>
+              handleTimeChange(pomdoroSlider.value, 'pomodoro')}"
+            type="number"
+            id="pomdoro"
+            name="pomodoro"
+            min="1"
+            max="60"
+          /><span class="validity"></span>
+        </div>
       </div>
       <div class="row">
         <label for="shortbreak">SHORTBREAK</label>
-        <input
-          bind:this="{shortBreakSlider}"
-          bind:value="{times.shortBreak}"
-          on:change="{() =>
-            handleTimeChange(shortBreakSlider.value, 'shortBreak')}"
-          type="number"
-          id="shortbreak"
-          name="shortbreak"
-          min="1"
-          max="60"
-        /><span class="validity"></span>
+        <div class="gap">
+          <input
+            bind:this="{shortBreakSlider}"
+            bind:value="{times.shortBreak}"
+            on:change="{() =>
+              handleTimeChange(shortBreakSlider.value, 'shortBreak')}"
+            type="number"
+            id="shortbreak"
+            name="shortbreak"
+            min="1"
+            max="60"
+          /><span class="validity"></span>
+        </div>
       </div>
       <div class="row">
         <label for="longbreak">LONGBREAK</label>
-        <input
-          bind:this="{longBreakSlider}"
-          bind:value="{times.longBreak}"
-          on:change="{() =>
-            handleTimeChange(longBreakSlider.value, 'longBreak')}"
-          type="number"
-          id="longbreak"
-          name="longbreak"
-          min="1"
-          max="60"
-        /><span class="validity"></span>
+        <div class="gap">
+          <input
+            bind:this="{longBreakSlider}"
+            bind:value="{times.longBreak}"
+            on:change="{() =>
+              handleTimeChange(longBreakSlider.value, 'longBreak')}"
+            type="number"
+            id="longbreak"
+            name="longbreak"
+            min="1"
+            max="60"
+          /><span class="validity"></span>
+        </div>
       </div>
     </div>
     <button class="neutral" on:click="{handleButtonClick}">Okay</button>
@@ -98,6 +105,12 @@
     background-color: #636e72;
   }
 
+  .gap {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
   .row {
     display: flex;
     align-items: center;
@@ -106,10 +119,10 @@
   }
 
   input {
-    width: 80px;
+    width: 50px;
     border: none;
     border-bottom: 1px solid #000;
-    padding: 0.5rem;
+    padding: 0rem;
     font-size: 1.5rem;
     text-align: center;
     &:focus {

@@ -17,11 +17,20 @@
   export let time: number
   export let updateTaskProgress
 
+  let previousMode = mode
   let timer: number
   let timerRunning = false
   let sound = new Howl({
     src: [ping]
   })
+
+  $: {
+    if (mode !== previousMode) {
+      stopTimer() // Clear any existing timer
+      timeAsSeconds = time * 60 // Reset the time based on the new mode
+    }
+    previousMode = mode // Store the current mode as the previous mode
+  }
 
   $: timeAsSeconds = time * 60
   $: minutes = Math.floor(timeAsSeconds / 60)

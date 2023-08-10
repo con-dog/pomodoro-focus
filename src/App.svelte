@@ -51,7 +51,7 @@
   let showSliderModal = false
   let tasks = []
 
-  $: times = {
+  let times = {
     pomodoro: 25,
     shortBreak: 5,
     longBreak: 15
@@ -62,7 +62,6 @@
 
   function setMode(newMode: string) {
     mode = newMode
-    time = times[mode]
   }
 
   function setLabelColor(e, target) {
@@ -188,7 +187,7 @@
   }
 
   function handleTimeChange(value, target) {
-    times[target] = value
+    times[target] = parseInt(value)
   }
 </script>
 

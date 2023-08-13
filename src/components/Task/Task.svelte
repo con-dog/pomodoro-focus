@@ -133,7 +133,7 @@
   }
 
   .selected {
-    outline: 2px solid var(--text-color);
+    outline: 4px solid var(--text-color);
   }
 
   .button-p {

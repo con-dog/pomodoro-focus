@@ -33,7 +33,7 @@
     <!-- svelte-ignore a11y-autofocus -->
     <div>
       <div class="row">
-        <label for="pomodoro">POMDORO</label>
+        <label for="pomodoro">POMODORO</label>
         <div class="gap">
           <input
             bind:this="{pomdoroSlider}"

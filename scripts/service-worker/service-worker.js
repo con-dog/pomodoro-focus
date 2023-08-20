@@ -15,7 +15,7 @@ By accessing or using any copyrighted materials owned by Pomodoro Focus extensio
 
 For any inquiries regarding this Copyright Disclaimer, please contact 'hello' at hello@hackhive.io
 
-Date: 08.06.2023 deviceview | Connor Talbot | Auckland, New Zealand
+Date: 08.06.2023 hackhive | Connor Talbot | New Zealand
 */
 
 chrome.sidePanel

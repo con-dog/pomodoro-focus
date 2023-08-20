@@ -14,7 +14,7 @@
 
   For any inquiries regarding this Copyright Disclaimer, please contact 'hello' at hello@hackhive.io
 
-  Date: 08.06.2023 deviceview | Connor Talbot | Auckland, New Zealand
+  Date: 08.06.2023 hackhive | New Zealand
   */
   import AddTask from './components/AddTask/AddTask.svelte'
   import PaletteModal from './components/Modals/PaletteModal.svelte'

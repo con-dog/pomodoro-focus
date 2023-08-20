@@ -1,6 +1,8 @@
 # WELCOME
 This open-source project is a great way to understand how to build a Chrome Extension (with Svelte).
 
+![Screenshot](https://github.com/con-dog/pomodoro-focus/blob/1566d3a6ad2f88b496693840246c03ae778ff564/extension/screenshots/Screenshot%201%20(1).png)
+
 It is a simple extension that shows a Pomodoro timer in a Chrome Side Panel, allows the user to run a timer, add tasks, and set their own
 custom timers and colours.
 

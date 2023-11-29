@@ -5,7 +5,7 @@
   "short_name": "Pomodoro Focus Task Management",
   "description": "Maximize productivity with an ever-visible foreground timer plus personalized task management on every tab.",
   "author": "hello@hackhive.io",
-  "minimum_chrome_version": "114",
+  "minimum_chrome_version": "1",
   "icons": {
     "16": "extension/icons/Pomodoro-Focus-Icon-Design-01.png",
     "32": "extension/icons/Pomodoro-Focus-Icon-Design-02.png",
